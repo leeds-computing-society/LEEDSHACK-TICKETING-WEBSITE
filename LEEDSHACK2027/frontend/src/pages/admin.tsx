@@ -156,8 +156,7 @@ function Admin() {
        DATABASE COMMANDS
        ========================================================= */
 
-    const [databaseCommand, setDatabaseCommand] =
-        useState("");
+    
 
     const [deletingDatabase, setDeletingDatabase] =
         useState(false);
@@ -531,25 +530,7 @@ function Admin() {
             }
         };
 
-    /* =========================================================
-       DATABASE COMMAND
-       ========================================================= */
-
-    const handleDatabaseCommand =
-        (
-            event: React.FormEvent<HTMLFormElement>
-        ) => {
-            event.preventDefault();
-
-            console.log(
-                "Database command:",
-                databaseCommand
-            );
-
-            alert(
-                "Database commands are not currently enabled."
-            );
-        };
+ 
 
     /* =========================================================
        DELETE DATABASE
