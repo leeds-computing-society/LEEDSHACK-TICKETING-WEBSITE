@@ -34,6 +34,7 @@ import csv
 
 from fastapi.responses import StreamingResponse
 
+
 load_dotenv()
 
 # Create FastAPI application
@@ -70,7 +71,7 @@ with engine.begin() as connection:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "https://leedshack-ticketing-website-leedshack.vercel.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
