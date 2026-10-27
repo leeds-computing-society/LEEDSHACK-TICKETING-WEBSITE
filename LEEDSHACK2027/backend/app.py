@@ -44,7 +44,16 @@ app = FastAPI(
     description="Backend API for LeedsHack 2027",
     version="1.0.0"
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://leedshack-ticketing-website.vercel.app",
+        "https://leedshack-ticketing-website-git-main-leedshack.vercel.app",
+        "https://leedshack-ticketing-website-8hw3sqo7p-leedshack.vercel.app",
+        "http://localhost:5173",],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 # Create database tables if they don't already exist
 
 Base.metadata.create_all(bind=engine)
@@ -69,13 +78,7 @@ with engine.begin() as connection:
         )
 # Allow React frontend to communicate with FastAPI
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://leedshack-ticketing-website-leedshack.vercel.app/"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
+
 
 # ============================================================
 
