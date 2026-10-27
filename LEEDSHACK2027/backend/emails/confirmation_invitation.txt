@@ -1,0 +1,16 @@
+Subject: LeedsHack 2027 - Confirm Your Place
+
+Hi {preferred_name},
+
+We're pleased to invite you to confirm your place at LeedsHack 2027!
+
+Please complete the confirmation form using the link below:
+
+{confirmation_url}
+
+Please make sure you submit the form to confirm your attendance.
+
+We look forward to welcoming you!
+
+Best wishes,
+The LeedsHack Team

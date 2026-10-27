@@ -1,0 +1,16 @@
+Subject: LeedsHack 2027 - You've Been Offered a Place!
+
+Hi {preferred_name},
+
+We have some exciting news! A place has become available, and we're pleased to offer you a place at LeedsHack 2027.
+
+To accept your place, please complete the confirmation form using the link below:
+
+{confirmation_url}
+
+Please complete the form to confirm your attendance.
+
+We're excited about the possibility of welcoming you to LeedsHack!
+
+Best wishes,
+The LeedsHack Team
