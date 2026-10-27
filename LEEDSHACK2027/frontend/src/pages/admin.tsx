@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../api";
 
 /* =========================================================
    TYPES
@@ -82,7 +83,7 @@ function Admin() {
             setLoadingStatistics(true);
 
             const response = await fetch(
-                "http://localhost:8000/api/admin/statistics"
+                `${API_URL}/api/admin/statistics`
             );
 
             if (!response.ok) {
@@ -239,7 +240,7 @@ function Admin() {
             setLoadingAttendees(true);
 
             const response = await fetch(
-                "http://localhost:8000/api/admin/participants"
+                `${API_URL}/api/admin/participants`
             );
 
             if (!response.ok) {
@@ -347,13 +348,13 @@ function Admin() {
                     reallocationResponse,
                 ] = await Promise.all([
                     fetch(
-                        "http://localhost:8000/api/admin/picked"
+                        `${API_URL}/api/admin/picked`
                     ),
                     fetch(
-                        "http://localhost:8000/api/admin/confirmed"
+                        `${API_URL}/api/admin/confirmed`
                     ),
                     fetch(
-                        "http://localhost:8000/api/admin/reallocation"
+                        `${API_URL}/api/admin/reallocation`
                     ),
                 ]);
 
@@ -477,7 +478,7 @@ function Admin() {
 
                 const response =
                     await fetch(
-                        "http://localhost:8000/api/admin/assign-teams",
+                        `${API_URL}/api/admin/assign-teams`,
                         {
                             method: "POST",
                             headers: {
@@ -593,7 +594,7 @@ function Admin() {
 
                 const response =
                     await fetch(
-                        "http://localhost:8000/api/admin/delete-database",
+                        `${API_URL}/api/admin/delete-database`,
                         {
                             method: "DELETE",
                         }
@@ -667,7 +668,7 @@ function Admin() {
 
                 const response =
                     await fetch(
-                        "http://localhost:8000/api/admin/random-pick",
+                        `${API_URL}/api/admin/random-pick`,
                         {
                             method: "POST",
                             headers: {
@@ -751,7 +752,7 @@ function Admin() {
             setLoading(true);
 
             const response = await fetch(
-                `http://localhost:8000${endpoint}`,
+                `${API_URL}${endpoint}`,
                 {
                     method: "POST",
                     headers: {
@@ -856,7 +857,7 @@ function Admin() {
 
                 const response =
                     await fetch(
-                        "http://localhost:8000/api/admin/reallocate-random",
+                        `${API_URL}/api/admin/reallocate-random`,
                         {
                             method: "POST",
                             headers: {
@@ -2902,7 +2903,7 @@ function Admin() {
                                                         </p>
 
                                                         <a
-                                                            href="http://localhost:8000/api/admin/export/mlh-emails"
+                                                            href={`${API_URL}/api/admin/export/mlh-emails`}
                                                             className="btn btn-primary"
                                                         >
                                                             📥 Export MLH Emails
@@ -2930,7 +2931,7 @@ function Admin() {
                                                         </p>
 
                                                         <a
-                                                            href="http://localhost:8000/api/admin/export/sponsor-emails"
+                                                            href={`${API_URL}/api/admin/export/sponsor-emails`}
                                                             className="btn btn-success"
                                                         >
                                                             📥 Export Sponsor Emails

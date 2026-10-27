@@ -1,6 +1,7 @@
 import PageLayout from "../components/PageLayout";
 import { useState } from "react";
 import { Link ,useNavigate } from "react-router-dom";
+import { API_URL } from "../api";
 
 function TeamRegister() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function TeamRegister() {
     try {
 
         const response = await fetch(
-            "http://localhost:8000/api/team-register",
+            `${API_URL}/api/team-register`,
             {
                 method: "POST",
 
@@ -123,7 +124,7 @@ function TeamRegister() {
         alert(
             "Could not connect to the backend.\n\n" +
             "Make sure FastAPI is running on " +
-            "http://localhost:8000"
+            "`${API_URL}`"
         );
     }
 };

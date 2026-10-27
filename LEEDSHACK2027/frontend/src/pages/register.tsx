@@ -2,6 +2,7 @@ import PageLayout from "../components/PageLayout";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../api";
 
 const dietaryOptions = [
     {
@@ -221,7 +222,7 @@ function Register() {
 
     try {
     const response = await fetch(
-        "http://localhost:8000/api/register",
+        `${API_URL}/api/register`,
         {
             method: "POST",
 
@@ -308,7 +309,7 @@ function Register() {
     alert(
         "Could not connect to the backend.\n\n" +
         "Make sure FastAPI is running on " +
-        "http://localhost:8000"
+        "`${API_URL}`"
     );
 }
 };

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { API_URL } from "../api";
 
 function Home() {
   const [mousePosition, setMousePosition] = useState({

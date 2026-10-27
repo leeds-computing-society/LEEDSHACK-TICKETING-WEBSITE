@@ -1,7 +1,7 @@
 import PageLayout from "../components/PageLayout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { API_URL } from "../api";
 function Confirmation() {
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function Confirmation() {
 
         try {
             const response = await fetch(
-                "http://localhost:8000/api/confirm-attendance",
+                `${API_URL}/api/confirm-attendance`,
                 {
                     method: "POST",
                     headers: {
