@@ -1031,7 +1031,7 @@ function Home() {
 
                 <Link
                   to="/team"
-                  className="btn outline-button rounded-pill py-2"
+                  className="btn purple-button rounded-pill py-2"
                 >
                   Team Signup →
                 </Link>
