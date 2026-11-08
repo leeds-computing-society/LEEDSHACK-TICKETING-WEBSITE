@@ -69,7 +69,7 @@ function TeamRegister() {
 
         if (response.ok) {
 
-            alert(
+            console.log(
                 "Team created successfully!"
             );
 
@@ -121,7 +121,7 @@ function TeamRegister() {
             error
         );
 
-        alert(
+        console.log(
             "Could not connect to the backend.\n\n" +
             "Make sure FastAPI is running on " +
             "`${API_URL}`"

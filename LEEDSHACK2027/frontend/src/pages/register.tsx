@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../api";
-
+const [isSubmitting, setIsSubmitting] = useState(false);
 const dietaryOptions = [
     {
         name: "vegetarian",
@@ -122,22 +122,172 @@ function Register() {
   };
 
   const universities = [
-      
-      "University of Leeds",
-      "Leeds Beckett University",
-      "University of Manchester",
-      "University of Birmingham",
-      "University of Bristol",
-      "University of Cambridge",
-      "University of Oxford",
-      "Imperial College London",
-      "University College London",
-      "University of Edinburgh",
-      "University of Glasgow",
-      "University of Sheffield",
-      "University of York",
-      "Other",
-  ];
+    "University of Leeds",
+    "Abertay University",
+    "Aberystwyth University",
+    "Anglia Ruskin University",
+    "Arts University Bournemouth",
+    "Arts University Plymouth",
+    "Aston University",
+    "Bangor University",
+    "Bath Spa University",
+    "Birkbeck, University of London",
+    "Birmingham City University",
+    "Birmingham Newman University",
+    "Bournemouth University",
+    "BPP University",
+    "Brunel University of London",
+    "Buckinghamshire New University",
+    "Canterbury Christ Church University",
+    "Cardiff Metropolitan University",
+    "Cardiff University",
+    "City St George's, University of London",
+    "Coventry University",
+    "Cranfield University",
+    "De Montfort University",
+    "Durham University",
+    "Edge Hill University",
+    "Edinburgh Napier University",
+    "European School of Economics",
+    "Falmouth University",
+    "Glasgow Caledonian University",
+    "Goldsmiths, University of London",
+    "Guildhall School of Music and Drama",
+    "Harper Adams University",
+    "Hartpury University",
+    "Heriot-Watt University",
+    "Imperial College London",
+    "Keele University",
+    "King's College London",
+    "Kingston University",
+    "Lancaster University",
+    "Leeds Arts University",
+    "Leeds Beckett University",
+    "Leeds Conservatoire",
+    "Leeds Trinity University",
+    "Lincoln Bishop University",
+    "Liverpool Hope University",
+    "Liverpool John Moores University",
+    "Liverpool School of Tropical Medicine",
+    "London Business School",
+    "London Metropolitan University",
+    "London School of Hygiene and Tropical Medicine",
+    "London South Bank University",
+    "Loughborough University",
+    "Manchester Metropolitan University",
+    "Middlesex University",
+    "Newcastle University",
+    "Northern School of Contemporary Dance",
+    "Northumbria University",
+    "Norwich University of the Arts",
+    "Nottingham Trent University",
+    "Oxford Brookes University",
+    "Plymouth Marjon University",
+    "Queen Margaret University",
+    "Queen Mary University of London",
+    "Queen's University Belfast",
+    "Ravensbourne University London",
+    "Regent's University London",
+    "Richmond American University London",
+    "Robert Gordon University",
+    "Rose Bruford College",
+    "Royal College of Art",
+    "Royal College of Music",
+    "Royal Conservatoire of Scotland",
+    "Royal Holloway, University of London",
+    "Royal Northern College of Music",
+    "School of Advanced Study, University of London",
+    "Scotland's Rural College",
+    "Sheffield Hallam University",
+    "SOAS, University of London",
+    "Solent University",
+    "St Mary's University, Twickenham",
+    "Swansea University",
+    "Teesside University",
+    "The Courtauld Institute of Art",
+    "The Glasgow School of Art",
+    "The Liverpool Institute for Performing Arts",
+    "The London School of Economics and Political Science",
+    "The Royal Academy of Music",
+    "The Royal Agricultural University",
+    "The Royal Central School of Speech and Drama",
+    "The Royal Veterinary College",
+    "The University of Buckingham",
+    "The University of Law",
+    "The University of Northampton",
+    "The University of York",
+    "Trinity Laban Conservatoire of Music and Dance",
+    "Ulster University",
+    "University College Birmingham",
+    "University College London",
+    "University for the Creative Arts",
+    "University of Aberdeen",
+    "University of Bath",
+    "University of Bedfordshire",
+    "University of Birmingham",
+    "University of Bradford",
+    "University of Brighton",
+    "University of Bristol",
+    "University of Cambridge",
+    "University of Central Lancashire",
+    "University of Chester",
+    "University of Chichester",
+    "University of Cumbria",
+    "University of Derby",
+    "University of Dundee",
+    "University of East Anglia",
+    "University of East London",
+    "University of Edinburgh",
+    "University of Essex",
+    "University of Exeter",
+    "University of Glasgow",
+    "University of Gloucestershire",
+    "University of Greater Manchester",
+    "University of Greenwich",
+    "University of Hertfordshire",
+    "University of Huddersfield",
+    "University of Hull",
+    "University of Kent",
+    "University of Leicester",
+    "University of Lincoln",
+    "University of Liverpool",
+    "University of London",
+    "University of Manchester",
+    "University of Nottingham",
+    "University of Oxford",
+    "University of Plymouth",
+    "University of Portsmouth",
+    "University of Reading",
+    "University of Roehampton",
+    "University of Salford",
+    "University of Sheffield",
+    "University of South Wales",
+    "University of Southampton",
+    "University of St Andrews",
+    "University of Staffordshire",
+    "University of Stirling",
+    "University of Strathclyde",
+    "University of Suffolk",
+    "University of Sunderland",
+    "University of Surrey",
+    "University of Sussex",
+    "University of the Arts London",
+    "University of the Highlands and Islands",
+    "University of the West of England",
+    "University of the West of Scotland",
+    "University of Wales",
+    "University of Wales Trinity Saint David",
+    "University of Warwick",
+    "University of West London",
+    "University of Westminster",
+    "University of Winchester",
+    "University of Wolverhampton",
+    "University of Worcester",
+    "Walbrook Institute London",
+    "Wrexham University",
+    "York St John University",
+    "Other"
+];
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -219,7 +369,7 @@ function Register() {
         "Sending registration:",
         registrationData
     );
-
+    setIsSubmitting(true);
     try {
     const response = await fetch(
         `${API_URL}/api/register`,
@@ -241,7 +391,7 @@ function Register() {
 
     if (response.ok) {
 
-        alert("Registration successful!");
+       
 
         console.log(
             "Registration successful:",
@@ -293,7 +443,7 @@ function Register() {
             );
         }
 
-        alert(
+        console.log(
             "Registration failed:\n\n" +
             errorMessage
         );
@@ -306,7 +456,7 @@ function Register() {
         error
     );
 
-    alert(
+    console.log(
         "Could not connect to the backend.\n\n" +
         "Make sure FastAPI is running on " +
         "`${API_URL}`"
@@ -449,14 +599,15 @@ function Register() {
                   </label>
 
                   <input
-                    type="date"
-                    className="form-control"
-                    id="dateOfBirth"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    required
-                  />
+    type="date"
+    className="form-control"
+    id="dateOfBirth"
+    name="dateOfBirth"
+    value={formData.dateOfBirth}
+    onChange={handleChange}
+    max="2009-01-31"
+    required
+/>
 
                   <div className="form-text">
                     You must be 18 or over to attend LeedsHack.
@@ -479,7 +630,7 @@ function Register() {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}
-                    placeholder="+44..."
+                    
                     required
                   />
                 </div>
@@ -776,7 +927,7 @@ function Register() {
               <div className="card-body p-4">
 
                 <h2 className="h4 fw-bold mb-3">
-                  Diversity & Inclusion
+                  Diversity & Inclusion *
                 </h2>
 
                 <p className="text-muted">
@@ -800,6 +951,7 @@ function Register() {
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
+                    required
                   >
                     <option value="">Select...</option>
                     <option value="Woman">Woman</option>
@@ -820,7 +972,7 @@ function Register() {
                     htmlFor="ethnicity"
                     className="form-label"
                   >
-                    How would you describe your race/ethnicity?
+                    How would you describe your race/ethnicity? *
                   </label>
 
                   <select
@@ -829,6 +981,7 @@ function Register() {
                     name="ethnicity"
                     value={formData.ethnicity}
                     onChange={handleChange}
+                    required
                   >
                     <option value="">Select...</option>
                     <option value="Asian / Asian British">
@@ -1256,9 +1409,7 @@ function Register() {
                 </h2>
 
                 <p>
-                  I consent to the use of photographs and/or videos in
-                  which I appear for promotional purposes related to the
-                  event.
+                  As part of registering for LeedsHack 2027, you are required to consent to being photographed and/or filmed during the event. Photos and videos may be used for promotional purposes, including on LeedsHack's website, social media and other marketing materials.Please note that agreeing to this consent is a mandatory requirement for registration.
                 </p>
 
                 <div className="form-check">
@@ -1269,13 +1420,14 @@ function Register() {
                     name="photography"
                     checked={formData.photography}
                     onChange={handleChange}
+                    required
                   />
 
                   <label
                     className="form-check-label"
                     htmlFor="photography"
                   >
-                    I agree
+                    I agree *
                   </label>
                 </div>
 
@@ -1393,8 +1545,16 @@ function Register() {
               <button
                 type="submit"
                 className="btn btn-primary btn-lg px-5"
+                disabled={isSubmitting}
               >
-                Submit Registration
+                {isSubmitting ? (
+        <>
+            <span className="spinner-border spinner-border-sm me-2" />
+            Processing your registration...
+        </>
+    ) : (
+        "Register"
+    )}
               </button>
 
               <div className="mt-3">
