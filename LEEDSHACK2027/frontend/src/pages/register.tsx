@@ -294,6 +294,24 @@ function Register() {
     event: React.FormEvent<HTMLFormElement>
 ) => {
     event.preventDefault();
+    const today = new Date();
+    const dob = new Date(formData.dateOfBirth + "T00:00:00");
+
+    let age = today.getFullYear() - dob.getFullYear();
+
+    const monthDifference = today.getMonth() - dob.getMonth();
+
+    if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < dob.getDate())
+    ) {
+        age--;
+    }
+
+    if (age < 18) {
+        alert("You must be at least 18 years old to register for LeedsHack 2027.");
+        return;
+    }
 
     const registrationData = {
         // Personal information
@@ -606,7 +624,7 @@ function Register() {
     name="dateOfBirth"
     value={formData.dateOfBirth}
     onChange={handleChange}
-    max="2009-01-31"
+    
     required
 />
 
@@ -943,7 +961,7 @@ function Register() {
                     htmlFor="gender"
                     className="form-label"
                   >
-                    How would you describe your gender?
+                    How would you describe your gender? *
                   </label>
 
                   <select
