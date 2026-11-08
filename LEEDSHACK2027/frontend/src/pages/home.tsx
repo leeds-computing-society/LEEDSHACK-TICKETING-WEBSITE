@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Ticket, Users, Settings } from "lucide-react";
+import { Ticket, Users } from "lucide-react";
 
 function Home() {
   const [mousePosition, setMousePosition] = useState({
