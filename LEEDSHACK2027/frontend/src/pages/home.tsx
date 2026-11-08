@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { Ticket, Users, Settings } from "lucide-react";
 
 function Home() {
   const [mousePosition, setMousePosition] = useState({
@@ -953,7 +953,7 @@ function Home() {
         <div className="row g-4 pb-5">
           {/* REGISTER */}
 
-          <div className="col-md-4">
+          <div className="col-md-6">
             <div className="glass-card rounded-4 h-100">
               <div className="card-body p-4 text-center d-flex flex-column">
                 <div
@@ -968,7 +968,7 @@ function Home() {
                     fontSize: "2rem",
                   }}
                 >
-                  🎟️
+                  <Ticket size={32} color="#C229FD" />
                 </div>
 
                 <h2 className="h3 fw-bold mb-3">
@@ -997,7 +997,7 @@ function Home() {
 
           {/* TEAM */}
 
-          <div className="col-md-4">
+          <div className="col-md-6">
             <div className="glass-card rounded-4 h-100">
               <div className="card-body p-4 text-center d-flex flex-column">
                 <div
@@ -1012,7 +1012,7 @@ function Home() {
                     fontSize: "2rem",
                   }}
                 >
-                  👥
+                  <Users size={32} color="#C229FD" />
                 </div>
 
                 <h2 className="h3 fw-bold mb-3">
@@ -1039,49 +1039,8 @@ function Home() {
             </div>
           </div>
 
-          {/* ADMIN */}
 
-          <div className="col-md-4">
-            <div className="glass-card rounded-4 h-100">
-              <div className="card-body p-4 text-center d-flex flex-column">
-                <div
-                  className="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle"
-                  style={{
-                    width: "70px",
-                    height: "70px",
-                    background:
-                      "rgba(194, 41, 253, 0.15)",
-                    border:
-                      "1px solid rgba(194, 41, 253, 0.25)",
-                    fontSize: "2rem",
-                  }}
-                >
-                  ⚙️
-                </div>
-
-                <h2 className="h3 fw-bold mb-3">
-                  Admin Portal
-                </h2>
-
-                <p
-                  className="flex-grow-1"
-                  style={{
-                    color: "#cfa9db",
-                  }}
-                >
-                  Manage registrations, teams and event
-                  administration.
-                </p>
-
-                <Link
-                  to="/admin"
-                  className="btn outline-button rounded-pill py-2"
-                >
-                  Admin →
-                </Link>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         {/* ===================================================

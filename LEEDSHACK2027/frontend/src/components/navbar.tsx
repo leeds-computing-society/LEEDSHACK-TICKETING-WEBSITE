@@ -449,29 +449,7 @@ function Navbar() {
               </li>
 
 
-              {/* Admin */}
-              <li className="nav-item">
-                <Link
-                  className="nav-link navbar-link"
-                  to="/admin"
-                  style={
-                    hoveredLink === "admin"
-                      ? ({
-                          "--mouse-x": `${mousePosition.x}%`,
-                          "--mouse-y": `${mousePosition.y}%`,
-                        } as React.CSSProperties)
-                      : undefined
-                  }
-                  onMouseMove={(event) =>
-                    handleMouseMove(event, "admin")
-                  }
-                  onMouseEnter={() => setHoveredLink("admin")}
-                  onMouseLeave={() => setHoveredLink(null)}
-                >
-                  <i className="bi bi-shield-lock-fill me-1"></i>
-                  Admin
-                </Link>
-              </li>
+              
 
             </ul>
           </div>
