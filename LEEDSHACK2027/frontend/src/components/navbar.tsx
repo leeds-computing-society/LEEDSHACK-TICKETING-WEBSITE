@@ -26,6 +26,12 @@ function Navbar() {
     <>
       <style>
         {`
+         @media (max-width: 991.98px) {
+            #mlh-trust-badge {
+                right: 65px !important;
+                width: 45px !important;
+            }
+        }
           /* =========================
              NAVBAR
              ========================= */
@@ -460,12 +466,11 @@ function Navbar() {
         href="https://www.mlh.com/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2027-season&utm_content=white"
         target="_blank"
         rel="noopener noreferrer"
-        className="position-fixed top-0 end-0 me-2 me-md-4 me-lg-5 w-auto"
-        style={{
+       className="position-fixed top-0 end-0 me-1 me-sm-2 me-md-4 me-lg-5"
+    style={{
         zIndex: 10000,
-        maxWidth: "100px",
-        minWidth: "55px",
-        width: "10vw",
+        width: "clamp(35px, 8vw, 100px)",
+        
     }}
     >
         <img
