@@ -135,7 +135,7 @@ def register(
         halal=int(participant.halal),
         kosher=int(participant.kosher),
         gluten_free=int(participant.gluten_free),
-        no_beef=int(participant.no_beef),
+        no_beef= 0,
         lactose_intolerant=int(
             participant.lactose_intolerant
         ),

@@ -25,17 +25,14 @@ const dietaryOptions = [
         name: "gluten_free",
         label: "Gluten-free",
     },
-    {
-        name: "no_beef",
-        label: "No beef",
-    },
+   
     {
         name: "lactose_intolerant",
         label: "Lactose intolerant",
     },
     {
         name: "dietary_other",
-        label: "Other, including allergies",
+        label: "Specify severity of allergies/ food preferences or list other dietary requirements.",
     },
 ];
 
@@ -80,6 +77,8 @@ function Register() {
       dietary_other: false,
       dietaryOtherDescription: "",
 
+      mealPreference: "",
+
       // Event
       tshirtSize: "",
       accessibility: "",
@@ -98,6 +97,8 @@ function Register() {
       photography: false,
       mlhEmails: false,
       sponsorEmails: false,
+
+
   });
 
   const handleChange = (
@@ -113,6 +114,18 @@ function Register() {
           setFormData((previous) => ({
               ...previous,
               [name]: checked,
+
+              // Vegetarian and Vegan cannot both be selected
+              ...(name === "vegetarian" && checked
+                  ? { vegan: false }
+                  : {}),
+
+              ...(name === "vegan" && checked
+                  ? { vegetarian: false }
+                  : {}),
+              ...( ["halal", "vegetarian", "vegan"].includes(name)
+                  ? { mealPreference: "" }
+                  : {}),
           }));
       } else {
           setFormData((previous) => ({
@@ -312,7 +325,15 @@ function Register() {
         alert("You must be at least 18 years old to register for LeedsHack 2027.");
         return;
     }
+    const hasMealConflict =
+    formData.halal &&
+    (formData.vegetarian || formData.vegan);
 
+    const chooseHalalMeal =
+        hasMealConflict && formData.mealPreference === "halal";
+
+    const choosePlantBasedMeal =
+        hasMealConflict && formData.mealPreference === "plant_based";
     const registrationData = {
         // Personal information
         first_name: formData.firstName,
@@ -340,9 +361,17 @@ function Register() {
         ethnicity: formData.ethnicity,
 
         // Dietary
-        vegetarian: formData.vegetarian,
-        vegan: formData.vegan,
-        halal: formData.halal,
+        vegetarian: chooseHalalMeal
+            ? false
+            : formData.vegetarian,
+
+        vegan: chooseHalalMeal
+            ? false
+            : formData.vegan,
+
+        halal: choosePlantBasedMeal
+            ? false
+            : formData.halal,
         kosher: formData.kosher,
         gluten_free: formData.gluten_free,
         no_beef: formData.no_beef,
@@ -614,7 +643,7 @@ function Register() {
                     htmlFor="dateOfBirth"
                     className="form-label"
                   >
-                    How old will you be on 31st January 2027? *
+                    Date of Birth (You must be 18+ to participate in this event) *
                   </label>
 
                   <input
@@ -1071,14 +1100,74 @@ function Register() {
                     </label>
                 </div>
               ))}
-              {formData.dietary_other && (
+
+{formData.halal && (formData.vegetarian || formData.vegan) && (
+    <div className="mt-4 p-3 border rounded">
+        <h5 className="fw-bold mb-2">
+            Meal preference
+        </h5>
+
+        <p className="text-muted mb-3">
+            You've selected both Halal and Vegetarian/Vegan.
+            Which meal would you actually prefer?
+        </p>
+
+        <div className="form-check mb-2">
+            <input
+                className="form-check-input"
+                type="radio"
+                id="mealHalal"
+                name="mealPreference"
+                value="halal"
+                checked={formData.mealPreference === "halal"}
+                onChange={handleChange}
+                required
+            />
+
+            <label
+                className="form-check-label"
+                htmlFor="mealHalal"
+            >
+                <strong>Halal meat meal</strong>
+                <div className="form-text">
+                    I would prefer the Halal meat option.
+                </div>
+            </label>
+        </div>
+
+        <div className="form-check">
+            <input
+                className="form-check-input"
+                type="radio"
+                id="mealVegetarian"
+                name="mealPreference"
+                value="plant_based"
+                checked={formData.mealPreference === "plant_based"}
+                onChange={handleChange}
+                required
+            />
+
+            <label
+                className="form-check-label"
+                htmlFor="mealVegetarian"
+            >
+                <strong>Vegetarian/Vegan meal</strong>
+                <div className="form-text">
+                    I would prefer the Vegetarian/Vegan option.
+                </div>
+            </label>
+        </div>
+    </div>
+)}
+
+              
                   <div className="mt-3">
 
                       <label
                           htmlFor="dietaryOtherDescription"
                           className="form-label"
                       >
-                          Please explain your requirements
+                          Additional dietary information
                       </label>
 
                       <textarea
@@ -1089,10 +1178,11 @@ function Register() {
                           value={formData.dietaryOtherDescription}
                           onChange={handleChange}
                           required
+                          placeholder="Please describe any allergies, their severity, intolerances or additional dietary preferences. For example, specify whether an allergy is mild or severe."
                       />
 
                   </div>
-              )}
+             
                 
 
               </div>
