@@ -462,15 +462,11 @@ function Navbar() {
         rel="noopener noreferrer"
         className="position-fixed top-0 end-0 me-2 me-md-4 me-lg-5 w-auto"
         style={{
-            display: "block",
-            maxWidth: "100px",
-            minWidth: "60px",
-            position: "fixed",
-            right: "50px",
-            top: 0,
-            width: "10%",
-            zIndex: 10000,
-        }}
+        zIndex: 10000,
+        maxWidth: "100px",
+        minWidth: "55px",
+        width: "10vw",
+    }}
     >
         <img
             src="https://logged-assets.s3.amazonaws.com/trust-badge/2027/mlh-trust-badge-2027-white.svg"
