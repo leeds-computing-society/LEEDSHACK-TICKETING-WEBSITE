@@ -460,6 +460,7 @@ function Navbar() {
         href="https://www.mlh.com/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2027-season&utm_content=white"
         target="_blank"
         rel="noopener noreferrer"
+        className="position-fixed top-0 end-0 me-2 me-md-4 me-lg-5 w-auto"
         style={{
             display: "block",
             maxWidth: "100px",
@@ -474,7 +475,7 @@ function Navbar() {
         <img
             src="https://logged-assets.s3.amazonaws.com/trust-badge/2027/mlh-trust-badge-2027-white.svg"
             alt="Major League Hacking 2027 Hackathon Season"
-            style={{ width: "100%" }}
+            className="img-fluid w-100"
         />
     </a>
     </>
