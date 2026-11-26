@@ -426,7 +426,7 @@ function Admin() {
     ) => {
         event.preventDefault();
 
-        if (password === "123") {
+        if (password === "KaiLingRules77") {
             setAuthenticated(true);
             setPasswordError("");
         } else {
@@ -634,7 +634,7 @@ function Admin() {
                 window.confirm(
                     "Are you sure you want to randomly select teams?\n\n" +
                         "Whole teams will be selected until a maximum of " +
-                        "200 people has been reached.\n\n" +
+                        "250 people has been reached.\n\n" +
                         "All remaining Pending applicants will become Not Picked."
                 );
 
@@ -1623,7 +1623,7 @@ function Admin() {
                                                 Randomly select complete
                                                 teams from the Pending
                                                 applicants up to a
-                                                maximum of 200 people.
+                                                maximum of 250 people.
                                             </p>
 
                                             <button

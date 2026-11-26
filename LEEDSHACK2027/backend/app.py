@@ -875,7 +875,7 @@ def delete_database(db: Session = Depends(get_db)):
 @app.post("/api/admin/random-pick")
 
 def randomly_pick_teams(db: Session = Depends(get_db)):
-    MAX_PEOPLE = 200
+    MAX_PEOPLE = 250
     try:
         # Get everyone currently pending
         participants = (

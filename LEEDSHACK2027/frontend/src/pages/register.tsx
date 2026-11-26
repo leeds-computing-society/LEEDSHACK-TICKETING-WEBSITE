@@ -32,12 +32,13 @@ const dietaryOptions = [
     },
     {
         name: "dietary_other",
-        label: "Specify severity of allergies/ food preferences or list other dietary requirements.",
+        label: "Other - Describe below",
     },
 ];
 
 function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registrationError, setRegistrationError] = useState("");
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -418,7 +419,8 @@ function Register() {
         registrationData
     );
     setIsSubmitting(true);
-    try {
+    setRegistrationError("");
+  try {
     const response = await fetch(
         `${API_URL}/api/register`,
         {
@@ -432,30 +434,25 @@ function Register() {
         }
     );
 
-    const result = await response.json();
+    // Read the backend response
+    const result = await response.json().catch(() => ({}));
 
     console.log("HTTP status:", response.status);
     console.log("Backend response:", result);
 
-    if (response.ok) {
+    // Check whether registration was successful
+    if (!response.ok) {
 
-       
+        // Handle duplicate university email
+        if (response.status === 409) {
+            throw new Error(
+                "This university email is already registered. Please use a different email address."
+            );
+        }
 
-        console.log(
-            "Registration successful:",
-            result
-        );
-        setShowSuccess(true);
-    } else {
+        let errorMessage = "Registration failed. Please try again.";
 
-        console.error(
-            "Backend error:",
-            result
-        );
-
-        let errorMessage = "Unknown error";
-
-        // FastAPI validation errors
+        // FastAPI validation errors (422)
         if (Array.isArray(result.detail)) {
 
             errorMessage = result.detail
@@ -464,8 +461,7 @@ function Register() {
                     const field = error.loc
                         ? error.loc
                             .filter(
-                                (item: any) =>
-                                    item !== "body"
+                                (item: any) => item !== "body"
                             )
                             .join(".")
                         : "Unknown field";
@@ -474,14 +470,12 @@ function Register() {
                 })
                 .join("\n");
 
-        // Normal FastAPI error
-        } else if (
-            typeof result.detail === "string"
-        ) {
+        // Normal FastAPI errors (e.g. 400, 404, 500)
+        } else if (typeof result.detail === "string") {
 
             errorMessage = result.detail;
 
-        // Any other object returned by the backend
+        // Other backend errors
         } else if (result.detail) {
 
             errorMessage = JSON.stringify(
@@ -491,25 +485,33 @@ function Register() {
             );
         }
 
-        console.log(
-            "Registration failed:\n\n" +
-            errorMessage
-        );
+        throw new Error(errorMessage);
     }
+
+    // Registration successful
+    console.log("Registration successful:", result);
+
+    setShowSuccess(true);
 
 } catch (error) {
 
-    console.error(
-        "Error submitting registration:",
-        error
-    );
+    console.error("Error submitting registration:", error);
 
-    console.log(
-        "Could not connect to the backend.\n\n" +
-        "Make sure FastAPI is running on " +
-        "`${API_URL}`"
-    );
-}
+    if (error instanceof Error) {
+        setRegistrationError(error.message);
+    } else {
+        setRegistrationError(
+            "Something went wrong. Please try again."
+        );
+    }
+
+} finally {
+
+    // Always stop the spinner after the request finishes
+    setIsSubmitting(false);
+
+}  
+
 };
  
   return (
@@ -1177,7 +1179,16 @@ function Register() {
                           rows={3}
                           value={formData.dietaryOtherDescription}
                           onChange={handleChange}
-                          required
+                          required={
+                            formData.vegetarian ||
+                            formData.vegan ||
+                            formData.halal ||
+                            formData.kosher ||
+                            formData.gluten_free ||
+                            formData.no_beef ||
+                            formData.lactose_intolerant ||
+                            formData.dietary_other
+                          }
                           placeholder="Please describe any allergies, their severity, intolerances or additional dietary preferences. For example, specify whether an allergy is mild or severe."
                       />
 
@@ -1650,7 +1661,18 @@ function Register() {
             {/* ================================================= */}
 
             <div className="text-center mb-5">
+              {registrationError && (
+    <div
+        className="alert alert-danger text-start"
+        role="alert"
+    >
+        <strong>Registration unsuccessful.</strong>
 
+        <div className="mt-1">
+            {registrationError}
+        </div>
+    </div>
+)}
               <button
                 type="submit"
                 className="btn btn-primary btn-lg px-5"
